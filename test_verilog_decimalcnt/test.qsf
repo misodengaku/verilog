@@ -48,7 +48,6 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR "-1"
 set_location_assignment PIN_36 -to LED_1
-set_global_assignment -name VERILOG_FILE "E:/Documents/verilog/test.v"
 set_location_assignment PIN_54 -to SW_2
 set_location_assignment PIN_55 -to SW_1
 set_location_assignment PIN_53 -to SW_3
@@ -92,3 +91,5 @@ set_location_assignment PIN_1 -to SEG7_CTL1
 set_location_assignment PIN_2 -to SEG7_CTL2
 set_location_assignment PIN_3 -to SEG7_CTL3
 set_location_assignment PIN_4 -to SEG7_CTL4
+set_global_assignment -name VERILOG_FILE test.v
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STILL AIR"

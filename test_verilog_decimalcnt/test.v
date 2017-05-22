@@ -22,7 +22,8 @@ module test(
 	output SEG7_E = 0,
 	output SEG7_F = 0,
 	output SEG7_G = 0,
-	output SEG7_DP = 0
+	output SEG7_DP = 0,
+	output BUZZER = 0
 );
 
 	function [7:0] decode7segled (
@@ -60,13 +61,29 @@ module test(
 	reg [3:0] dec_count10 = 4'b0;
 	reg [3:0] dec_count100 = 4'b0;
 	reg [3:0] dec_count1000 = 4'b0;
+	reg [5:0] pulse_cnt = 0;
+	reg pulse = 0;
+	assign BUZZER = pulse;
 	
 	
-	always @(posedge clk)
+	always @(posedge clk) // 48kHz
 	begin
 		sys_count <= sys_count + 32'b1;
+		pulse_cnt <= pulse_cnt + 1'b1;
+		
+		if (pulse_cnt > 24) begin
+			// 1kHz
+			pulse_cnt <= 0;
+			if (pulse == 1)
+				pulse <= 0;
+//			else
+//				pulse <= 1;
+		end
+		
 		if (sys_count > 12000) begin
+			// 0.25s
 			sys_count <= 0;
+			
 			if (SW_1 == 1'b0) begin
 				counter <= counter + 8'b1;
 				dec_count1 <= dec_count1 + 4'b1;
